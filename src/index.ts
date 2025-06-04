@@ -29,7 +29,7 @@ app.post("/api/v1/signup", async (req: Request, res: Response) => {
   }
 });
 
-app.post("/api/v1/signin", async (req: any, res: any) => {
+app.post("/api/v1/signin", async (req: any, res: ) => {
   const username = req.body.username;
   const password = req.body.password;
   const existingUser = await UserModel.findOne({
