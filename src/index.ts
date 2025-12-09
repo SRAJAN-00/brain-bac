@@ -19,14 +19,18 @@ const corsOptions: cors.CorsOptions = {
   // Use a function to validate origin strings explicitly to avoid treating
   // origin values as Express route patterns (which can trigger path-to-regexp).
   origin: function (origin, callback) {
+    console.log(`[CORS] Request from origin: ${origin}`);
     // Allow non-browser requests like curl/postman (no origin)
     if (!origin) return callback(null, true);
     if (allowedOrigins.length === 0) return callback(null, true);
     if (allowedOrigins.indexOf(origin) !== -1) return callback(null, true);
+    console.log(`[CORS] Origin ${origin} not in allowed list: ${JSON.stringify(allowedOrigins)}`);
     return callback(new Error("CORS policy: Origin not allowed"));
   },
   credentials: true,
   optionsSuccessStatus: 200,
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH']
 };
 console.log(`[server] CORS configured. allowedOrigins=${JSON.stringify(allowedOrigins)}`);
 app.use(cors(corsOptions));
