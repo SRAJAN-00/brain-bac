@@ -1,8 +1,9 @@
 import 'dotenv/config';
 import mongoose, { model, Schema } from "mongoose";
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost:27017/brainly"
-);
+import { MONGODB_URI } from "./config";
+
+// Connect using the centralized config value (reads from process.env via dotenv)
+mongoose.connect(MONGODB_URI);
 const userSchema = new Schema({
   username: { type: String, unique: true },
   password: String,
