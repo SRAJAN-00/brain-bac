@@ -15,6 +15,7 @@ const contentSchema = new Schema({
   title: String,
   tags: [{ type: mongoose.Types.ObjectId, ref: "Tag" }],
   type: String,
+  notes: { type: String, default: "" },
   userId: { type: mongoose.Types.ObjectId, ref: "User", required: true },
 });
 export const contentModel = model("Content", contentSchema);
